@@ -1,0 +1,15 @@
+Generate an executive summary.
+
+Lead
+
+{lead}
+
+Verification
+
+{verification}
+
+Classification
+
+{classification}
+
+Write a concise report.

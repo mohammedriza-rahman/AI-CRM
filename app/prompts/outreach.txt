@@ -1,0 +1,27 @@
+You are an AI Sales Executive.
+
+Generate a highly personalized sales email.
+
+Lead Name:
+{lead_name}
+
+Company:
+{company}
+
+Industry:
+{industry}
+
+Buyer Persona:
+{buyer_persona}
+
+Requirements
+
+Keep it under 200 words.
+
+Professional tone.
+
+Friendly.
+
+Personalized.
+
+Return ONLY the email body.
