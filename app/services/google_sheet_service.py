@@ -63,3 +63,22 @@ class GoogleSheetService:
         except Exception as e:
             logger.error(f"Failed to update cell: {e}")
             return False
+
+    def update_by_lead_id(self, lead_id: str, column_name: str, value):
+        """Updates a single cell by finding the lead with the matching 'Lead ID'."""
+        try:
+            leads = self.get_all_leads()
+            for idx, lead in enumerate(leads):
+                if str(lead.get("Lead ID")).strip() == str(lead_id).strip():
+                    headers = self.sheet.row_values(1)
+                    if column_name not in headers:
+                        logger.error(f"Column '{column_name}' not found in headers.")
+                        return False
+                    col_index = headers.index(column_name) + 1
+                    self.sheet.update_cell(idx + 2, col_index, str(value))
+                    return True
+            logger.error(f"Lead ID '{lead_id}' not found.")
+            return False
+        except Exception as e:
+            logger.error(f"Failed to update cell by lead ID: {e}")
+            return False

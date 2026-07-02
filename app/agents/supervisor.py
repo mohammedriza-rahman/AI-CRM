@@ -45,7 +45,13 @@ Industry:
 
         response = self.llm.generate_json(prompt)
 
-        priority = response["priority"]
+        if not response or "priority" not in response:
+            import logging
+            logger = logging.getLogger(__name__)
+            logger.warning(f"Failed to score lead priority using Gemini for lead {state['lead_id']}. Defaulting to 50.")
+            priority = 50
+        else:
+            priority = response["priority"]
 
         self.sheet.update_by_lead_id(
 

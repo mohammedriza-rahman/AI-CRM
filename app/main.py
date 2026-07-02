@@ -68,3 +68,43 @@ def scheduler_status():
     return {
         "running": scheduler.running
     }
+
+
+@app.post("/process-pending")
+def trigger_processing():
+    """
+    Manually trigger processing of pending leads.
+    """
+    from app.scheduler import process_pending
+    process_pending()
+    return {
+        "status": "success",
+        "message": "Processing of pending leads triggered."
+    }
+
+
+@app.post("/check-responses")
+def trigger_response_check():
+    """
+    Manually trigger email response checking and classification.
+    """
+    from app.scheduler import check_responses
+    check_responses()
+    return {
+        "status": "success",
+        "message": "Response classification check triggered."
+    }
+
+
+@app.post("/report")
+def generate_campaign_report():
+    """
+    Manually trigger campaign report generation and sending.
+    """
+    from app.agents.report_generator import ReportGenerator
+    generator = ReportGenerator()
+    report_content = generator.generate_campaign_report()
+    return {
+        "status": "success",
+        "report": report_content
+    }
